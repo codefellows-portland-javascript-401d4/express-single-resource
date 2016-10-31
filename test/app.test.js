@@ -4,9 +4,8 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
 const path = require('path');
-const rimraf = require('rimraf');
+// const rimraf = require('rimraf');
 
-const ds = require('../lib/datastore');
 const app = require('../lib/app');
 
 
@@ -52,7 +51,7 @@ describe('Express http server API', () => {
         if (err) return done(err);
         assert.equal(res.text, testHtml);
         done();
-      })
+      });
   });
 
   it('retrieves the contents of a file', done => {
@@ -60,12 +59,12 @@ describe('Express http server API', () => {
     const expectedResults = '{"City":"Boston","State":"MA","Mean_1_Bdrm_Price":"$2025"}\n';
 
     server
-      .get('/city?id=boston.json')
+      .get('/city/boston.json')
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.text, expectedResults);
         done();
-      })
+      });
   });
 
 
@@ -74,13 +73,13 @@ describe('Express http server API', () => {
     const expectedResults = 'File san_diego.json saved.';
 
     server
-      .post('/city')
+      .post('/city/san_diego')
       .send({"City":"San Diego","State":"CA","Median_1_BR_price":"$1,500","Median_2_BR_price":"$2,100"})
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.text, expectedResults);
         done();
-      })
+      });
   });
 
   it('retrieves all files in the city folder by name', done => {
@@ -101,7 +100,7 @@ describe('Express http server API', () => {
         if (err) return done(err);
         assert.equal(res.text, testHtml);
         done();
-      })
+      });
   });
 
   it('retrieves the contents of a file added using POST method', done => {
@@ -109,12 +108,12 @@ describe('Express http server API', () => {
     const expectedResults = '{"City":"San Diego","State":"CA","Median_1_BR_price":"$1,500","Median_2_BR_price":"$2,100"}';
 
     server
-      .get('/city?id=san_diego.json')
+      .get('/city/san_diego.json')
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.text, expectedResults);
         done();
-      })
+      });
   });
 
   it('deletes the san_diego.json file', done => {
@@ -122,12 +121,12 @@ describe('Express http server API', () => {
     const expectedResults = 'san_diego.json deleted successfully.';
 
     server
-      .del('/city?id=san_diego')
+      .del('/city/san_diego')
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.text, expectedResults);
         done();
-      })
+      });
   });
 
 
@@ -144,7 +143,7 @@ describe('Express http server API', () => {
         console.log('in the callback, err res', err, res);
         assert.equal(res.text, expectedResults);
         done();
-      })
+      });
   });
 
   xit('retrieves all files in the city folder by name', done => {
@@ -165,7 +164,7 @@ describe('Express http server API', () => {
         if (err) return done(err);
         assert.equal(res.text, testHtml);
         done();
-      })
+      });
   });
 
 
