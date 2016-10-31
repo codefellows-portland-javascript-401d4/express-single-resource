@@ -42,7 +42,6 @@ describe('Our server responds to requests', done => {
     return chai.request(locHost)
       .get('/teams/1')
       .then(res => {
-        console.log(res.body);
         assert.deepEqual(res.body, testTeam1);
       })
       .catch(err => {
