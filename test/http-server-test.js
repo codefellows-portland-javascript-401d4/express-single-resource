@@ -4,6 +4,8 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const assert = chai.assert;
 const server = require('../lib/http-server');
+const express = require('express');
+const app = express();
 
 let request = chai.request(server);
 //original two-team data resource displayed as text
@@ -11,9 +13,9 @@ let origTeamsText = 'Oakland Athletics\nChicago Cubs\n';
 let basedir = 'data/';
 let filename = 'teamsTest.json';
 
-describe('Five tests for Expresssingle-resource http server', () => {
+describe('Five tests for Express single-resource http server', () => {
 
-  // Don't need this one for Express; it always deals with non-existent paths
+  // No longer need this one as Express always deals with non-existent paths
 
   // it('error message on non-existent path', done => {
   //   request
@@ -35,7 +37,7 @@ describe('Five tests for Expresssingle-resource http server', () => {
             });
   });
 
-  it('/recognizes /teams/:team' (fka querypath), done => {
+  it('/recognizes /teams/:team (fka querypath)', done => {
     request
             .get('/teams/Cubs')
             .end((err, res) => {
@@ -66,7 +68,7 @@ describe('Five tests for Expresssingle-resource http server', () => {
   it('PUT - edits team city in data store; confirm by checking that /teams page updates', done => {
     editTeam = {"name":"Giants", "city": "San Francisco"};   // eslint-disable-line
     request
-     .put('/teams?team=Giants')
+     .put('/teams/Giants')
      .send(editTeam)
      .end((err, res) => {
        if (err) return done(err);
@@ -83,7 +85,7 @@ describe('Five tests for Expresssingle-resource http server', () => {
   it('DELETE - removes team from data store; confirm by checking that /teams page updates', done => {
     delTeam = {"name":"Giants", "city": "San Francisco"};   // eslint-disable-line
     request
-     .delete('/teams?team=Giants')
+     .delete('/teams/Giants')
      .send(delTeam)
      .end((err, res) => {
        if (err) return done(err);
