@@ -2,7 +2,7 @@
   "name": "express-single-resource",
   "version": "1.0.0",
   "description": "description - express-single-resource",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "pretest": "npm run lint",
     "test": "npm run test:run",
