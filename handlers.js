@@ -1,5 +1,6 @@
 const fileStore = require('./lib/dotaTeam');
 const bodyReader = require('./lib/bodyReader');
+const pug = require('pug');
 
 const handlers = {};
 
@@ -115,5 +116,27 @@ handlers.notFound = res => {
   res.statusCode = 404;
   res.end('Resource not found.');
 };
+
+
+// handlers.renderHtml = (req, res, id) => {
+//     fileStore.getFile('/' + id)
+//     .then( (team) => {
+//         console.log(team);
+//         let showHtml = pug.render('dotaTeamView', {
+//           team_name: team.name,
+//           id: team.id,
+//           region: team.region,
+//           member: team.teamMembers,
+//           message: team.tiWinner
+//         });
+//         res.write(showHtml);
+//         res.statusCode = 200;
+//         res.end();
+//   })
+//   .catch(err => {
+//       console.log('GET/SHOW catch error');
+//       res.end(err);
+//   });
+// };
 
 module.exports = handlers;
