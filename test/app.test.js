@@ -16,7 +16,7 @@ describe('Express http server API', () => {
     sander.unlink('/home/driel/projects/CodeFellows401/lab_assignments/class11-express-resource/city/portland.json')
       .then(done)
       .catch((err) => {
-        console.error('You got a fs error ', err);
+        console.error('You got a fs error ', err.code);
         done();
       });
   });
