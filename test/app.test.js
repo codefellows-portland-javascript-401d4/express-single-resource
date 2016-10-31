@@ -54,7 +54,7 @@ describe('Express http server API', () => {
 
   it('retrieves the contents of a file', done => {
 
-    const expectedResults = '{"City":"Boston","State":"MA","Mean_1_Bdrm_Price":"$2025"}\n';
+    const expectedResults = '<html><head><title>City Rental Data</title></head><body><h1>Boston, MA</h1><p>Rental Data for Boston</p><ul><li>Mean one-bedroom price: $2025</li></ul></body></html>';
 
     server
       .get('/city/boston')
@@ -103,7 +103,7 @@ describe('Express http server API', () => {
 
   it('retrieves the contents of a file added using POST method', done => {
 
-    const expectedResults = '{"City":"San Diego","State":"CA","Median_1_BR_price":"$1,500","Median_2_BR_price":"$2,100"}';
+    const expectedResults = '<html><head><title>City Rental Data</title></head><body><h1>San Diego, CA</h1><p>Rental Data for San Diego</p><ul><li>Median one-bedroom price: $1,500</li></ul></body></html>';
 
     server
       .get('/city/san_diego.json')
