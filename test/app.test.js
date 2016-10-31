@@ -70,7 +70,7 @@ describe('Express http server API', () => {
 
   it('writes post data to a file', done => {
 
-    const expectedResults = 'File san_diego.json saved.';
+    const expectedResults = 'san_diego.json saved.';
 
     server
       .post('/city/san_diego')
