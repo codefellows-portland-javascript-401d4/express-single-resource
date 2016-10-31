@@ -1,0 +1,27 @@
+{
+  "name": "express-single-resource",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andybeers/express-single-resource.git"
+  },
+  "author": "Andy Beers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andybeers/express-single-resource/issues"
+  },
+  "homepage": "https://github.com/andybeers/express-single-resource#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2"
+  }
+}
