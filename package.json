@@ -1,0 +1,37 @@
+{
+  "name": "express-single-resource",
+  "version": "1.0.0",
+  "description": "This application is a filestore.",
+  "main": "http.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "pretest": "npm run lint",
+    "lint": "eslint .",
+    "test": "npm run test:run",
+    "test:run": "mocha -R nyan",
+    "test:watch": "npm run test:run -- -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nthugon/express-single-resource.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nthugon/express-single-resource/issues"
+  },
+  "homepage": "https://github.com/nthugon/express-single-resource#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "eslint": "^3.9.1",
+    "mocha": "^3.1.2"
+  },
+  "dependencies": {
+    "express": "^4.14.0",
+    "sander": "^0.5.1",
+    "url": "^0.11.0"
+  }
+}
