@@ -59,7 +59,7 @@ describe('Express http server API', () => {
     const expectedResults = '{"City":"Boston","State":"MA","Mean_1_Bdrm_Price":"$2025"}\n';
 
     server
-      .get('/city/boston.json')
+      .get('/city/boston')
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.text, expectedResults);
