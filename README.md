@@ -5,9 +5,10 @@
 
 ### Project Functionality
   - This is a Code Fellows Lab Assignment to create an http express server that uses the file system for persistent storage and retrieval - it is a faux database for notes
-  - The http server runs on localhost:8080
+  - The http server runs on localhost:3000
 
-  - server.js acts as a server & router
+  - server.js acts as a server
+  - app.js acts as request handler & router
   - dataStore.js accesses the the file system
   - readBody.js asynchronously builds the requestbody from the chunked database
   - resHandler.js writes the response and errors back to the user 
@@ -25,7 +26,7 @@
 
 ### How To Use Codebase
   - This module uses Node, npm and the following modules:
-    - net module from node, sander, http, path
+    - net module from node, sander, http, path, express
     - eslint, mocha, chai, chai-http for testing
   - Make sure to run npm install from the directory root to install dependencies
   - Please refer to the package.json for more info
