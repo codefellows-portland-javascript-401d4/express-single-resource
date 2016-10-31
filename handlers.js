@@ -13,7 +13,7 @@ handlers.post = (req, res) => {
             fileStore.createFile(team)
             .then(data => {
                 console.log('filestore.createfile: ', data);
-                res.writeHead(200, {
+                res.writeHead(201, {
                     'Content-Type': 'application/json' 
                 });
                 res.write(data);
@@ -42,19 +42,24 @@ handlers.getSingle = (req, res, id) => {
 handlers.getAll = (req, res) => {
   fileStore.readDir(fileStore.path)
     .then(idArr => {
-      console.log('idArr in getAll: ', idArr);
+      // console.log('idArr in getAll: ', idArr);
       return fileStore.getAll(idArr);
     })
     .then(allData => {
       res.writeHead(200, {
         'Content-Type': 'application/json' 
       });
-      console.log(allData);
+      // console.log(allData);
+      // allData.forEach( (ele) => {
+      //   console.log(ele);
+      //   res.write(ele);
+      // });
       res.write(JSON.stringify(allData));
       res.end();
     })
-    .catch( () => {
-      handlers.notFound(res);
+    .catch( (err) => {
+        console.log(err);
+        handlers.notFound(res);
     });
 };
 
