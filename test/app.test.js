@@ -4,7 +4,7 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
 const path = require('path');
-// const rimraf = require('rimraf');
+const sander = require('sander');
 
 const app = require('../lib/app');
 
@@ -14,14 +14,14 @@ describe('Express http server API', () => {
   const testDir = path.join(__dirname, 'test-dir');
   const server = chai.request(app);
 
-  // before(done => {
-  //   // if the portland file is still around, remove it. ditch the error if it's not around.
-  //   sander.unlink('/home/driel/projects/CodeFellows401/lab_assignments/class08-http-single-resource/city/portland.json')
-  //     .then(done)
-  //     .catch((err) => {
-  //       done();
-  //     });
-  // });
+  before(done => {
+    // if the portland file is still around, remove it. ditch the error if it's not around.
+    sander.unlink('/home/driel/projects/CodeFellows401/lab_assignments/class11-express-resource/city/portland.json')
+      .then(done)
+      .catch((err) => {
+        done();
+      });
+  });
 
 
   it('hits the root and gets a 200 Ok', done => {
