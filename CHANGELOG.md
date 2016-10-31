@@ -4,6 +4,14 @@ All changes to this project will be documented in this CHANGELOG
 Format based on Keep a Changelog (http://keepachangelog.com/)
 and project adheres to Semantic Versioning (http://semver.org).
 
+## [1.3.0] - 2016-10-30
+### Changed
+- edit README.md to reflect addition of express and port change
+
+### Added
+- express module
+
+
 ## [1.2.2] - 2016-10-30
 ### Changed
 - edit README.md to reflect testing and change in modules

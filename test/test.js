@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 //unit tests on the dataStore
 describe('unit testing the dataStore module', () => {
   it('reads a directory', () => {
-    dataStore.retrieveDir('./notes')
+    dataStore.retrieveDir('/notes')
       .then((dirList) => {
         expect(dirList).to.equal([ 'test1.json', 'test2.json' ]);
       })
@@ -19,7 +19,7 @@ describe('unit testing the dataStore module', () => {
   });
 
   it('reads a file', ()=> {
-    dataStore.retrieveFile('./notes/test1.json')
+    dataStore.retrieveFile('/notes/test1.json')
       .then((fileData) => {
         expect(fileData).to.be.equal({ 'title': 'test1.json', 'text': 'Dinner is consistent, the chicken comes out golden every time' });
       })
@@ -65,7 +65,7 @@ describe('E2E testing the server', () => {
       });
   });
 
-  it('fails whreturnn navigating to an unknown path', () => {
+  it('fails when navigating to an unknown path', () => {
     chai.request(server)
       .get('/nowhere/fast.json')
       .then((res) => {
