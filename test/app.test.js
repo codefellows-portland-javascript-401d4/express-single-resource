@@ -3,15 +3,12 @@ const assert = chai.assert;
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
-const path = require('path');
 const sander = require('sander');
-
 const app = require('../lib/app');
 
 
 describe('Express http server API', () => {
 
-  const testDir = path.join(__dirname, 'test-dir');
   const server = chai.request(app);
 
   before(done => {
@@ -19,6 +16,7 @@ describe('Express http server API', () => {
     sander.unlink('/home/driel/projects/CodeFellows401/lab_assignments/class11-express-resource/city/portland.json')
       .then(done)
       .catch((err) => {
+        console.error('You got a fs error ', err);
         done();
       });
   });
