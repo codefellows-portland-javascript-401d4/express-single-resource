@@ -1,4 +1,4 @@
-http-single-resource is a representation of a simple two-page website served by a single data resource (SDR) where the /teams page features a variety of GET, POST, and DELETE functionality.
+Express-single-resource is a representation of a simple two-page website served by a single data resource (SDR) where the /teams page features a variety of GET, POST, and DELETE functionality.
 
 It GETs a list of all teams on entry or only a single team if queried by team from the SDR.
 
@@ -8,7 +8,7 @@ It PUTs revisions to the city of an existing team to the SDR.
 
 It DELETEs a team's entry from the SDR.
 	
-It requires http, parseUrl, fs, and qs from node, the sander module, and a bodyReader module lifted from my Code Fellows 401 class.
+It requires fs from node, sander and express, and a bodyReader module lifted from my Code Fellows 401 class.
 
 There is a Mocha/Chai (with http add-in)/eslint test for this process in the 'test' folder.
 

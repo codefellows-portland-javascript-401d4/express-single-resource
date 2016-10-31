@@ -4,8 +4,6 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const assert = chai.assert;
 const server = require('../lib/http-server');
-const express = require('express');
-const app = express();
 
 let request = chai.request(server);
 //original two-team data resource displayed as text
