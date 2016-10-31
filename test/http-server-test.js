@@ -11,17 +11,19 @@ let origTeamsText = 'Oakland Athletics\nChicago Cubs\n';
 let basedir = 'data/';
 let filename = 'teamsTest.json';
 
-describe('Six tests for single-resource http server', () => {
+describe('Five tests for Expresssingle-resource http server', () => {
 
-  it('error message on non-existent path', done => {
-    request
-            .get('/DoesNotExist')
-            .end((err, res) => {
-              if (err) return done(err);
-              assert.equal(res.text, '404 - Not Found');
-              done();
-            });
-  });
+  // Don't need this one for Express; it always deals with non-existent paths
+
+  // it('error message on non-existent path', done => {
+  //   request
+  //           .get('/DoesNotExist')
+  //           .end((err, res) => {
+  //             if (err) return done(err);
+  //             assert.equal(res.text, '404 - Not Found');
+  //             done();
+  //           });
+  // });
 
   it('a path (/teams) uses url.pathname', done => {
     request
@@ -33,9 +35,9 @@ describe('Six tests for single-resource http server', () => {
             });
   });
 
-  it('/teams uses queryData.team', done => {
+  it('/recognizes /teams/:team' (fka querypath), done => {
     request
-            .get('/teams?team=Cubs')
+            .get('/teams/Cubs')
             .end((err, res) => {
               if (err) return done(err);
               assert.equal(res.text, 'Chicago Cubs');
