@@ -13,7 +13,7 @@ describe('Express http server API', () => {
 
   before(done => {
     // if the portland file is still around, remove it. ditch the error if it's not around.
-    sander.unlink('/home/driel/projects/CodeFellows401/lab_assignments/class11-express-resource/city/portland.json')
+    sander.unlink('/home/driel/projects/CodeFellows401/lab_assignments/class11-express-single-resource/city/portland.json')
       .then(done)
       .catch((err) => {
         console.error('You got a fs error ', err.code);
@@ -128,23 +128,21 @@ describe('Express http server API', () => {
   });
 
 
-  xit('writes a file using the PUT method', done => {
+  it('writes a file using the PUT method', done => {
 
     const expectedResults = 'File portland.json saved.';
 
     server
-      .put('/city/portland.json')
-      .set('application', 'json')
+      .put('/city/portland')
       .send({"City":"Portland","State":"OR","Median_1_BR_price":"$1,000","Median_2_BR_price":"$2,000"})
       .end((err, res) => {
         if (err) return done(err);
-        console.log('in the callback, err res', err, res);
         assert.equal(res.text, expectedResults);
         done();
       });
   });
 
-  xit('retrieves all files in the city folder by name', done => {
+  it('retrieves all files in the city folder by name', done => {
 
     const testHtml = '<h2>The data store contains the following files: </h2><ul>\n\n' +
       '<li>boston.json</li>' +
