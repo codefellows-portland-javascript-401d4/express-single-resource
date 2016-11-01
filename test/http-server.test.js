@@ -14,7 +14,7 @@ describe('My HTTP Server', () => {
 
   it('lists all the boardsports', done => {
     request
-      .get('/boardsports')
+      .get('/api/boardsports')
       .end((err, res) => {
         if (err) return done(err);
         expect(res.text).to.contain('snowskating');
@@ -25,7 +25,7 @@ describe('My HTTP Server', () => {
 
   it('lists the contents of one file', done => {
     request
-      .get('/boardsports/surfing')
+      .get('/api/boardsports/surfing')
       .end((err, res) => {
         if (err) return done(err);
         expect(res.text).to.contain('surfing');
@@ -37,12 +37,12 @@ describe('My HTTP Server', () => {
 
     let postObject = {name: "skateboarding", environment: "city", weather: "clear", equipment: "skateboard, shoes"};
     request
-      .post('/boardsports')
+      .post('/api/boardsports')
       .send(postObject)
       .end((err, res) => {
         if (err) return done(err);
         request
-          .get('/boardsports/skateboarding')
+          .get('/api/boardsports/skateboarding')
           .end((err, res) => {
             if (err) return done(err);
             expect(res.text).to.contain('skateboarding');
@@ -54,12 +54,12 @@ describe('My HTTP Server', () => {
   it('writes PUT on page', done => {
     putObject = {name: "skateboarding", environment: "urban", weather: "clear", equipment: "skateboard, shoes"};
     request
-      .put('/boardsports')
+      .put('/api/boardsports')
       .send(putObject)
       .end((err, res) => {
         if (err) return done(err);
         request
-          .get('/boardsports/skateboarding')
+          .get('/api/boardsports/skateboarding')
           .end((err, res) => {
             if (err) return done(err);
             expect(res.text).to.contain('urban');
@@ -70,11 +70,11 @@ describe('My HTTP Server', () => {
 
   it('deletes a file', done => {
     request
-      .delete('/boardsports/skateboarding')
+      .delete('/api/boardsports/skateboarding')
       .end((err, res) => {
         if (err) return done(err); 
         request
-          .get('/boardsports')
+          .get('/api/boardsports')
           .end((err, res) => {
             if (err) return done(err);
             expect(res.text).to.not.contain('skateboarding');
