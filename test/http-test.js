@@ -2,6 +2,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../index.js');
 const rimraf = require('rimraf');
+const mkdirp = require('mkdirp');
 const assert = chai.assert;
 const fileStore = require('../lib/dotaTeam');
 chai.use(chaiHttp);
@@ -16,7 +17,13 @@ describe('Our server responds to requests', done => {
             if (err) throw err;
             done();
         });
-        
+    });
+
+    before(done => {
+        mkdirp('./lib/dotaTeams', (err) => {
+            if (err) throw err;
+            done();
+        });        
     });
 
     it('Should make a file from a POST request', () => {
