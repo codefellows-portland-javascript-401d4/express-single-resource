@@ -3,12 +3,12 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const assert = chai.assert;
-const server = require('../lib/http-server');
+const server = require('../lib/app');
 
 let request = chai.request(server);
 //original two-team data resource displayed as text
 let origTeamsText = 'Oakland Athletics\nChicago Cubs\n';
-let basedir = 'data/';
+let basedir = './lib/models/';
 let filename = 'teamsTest.json';
 
 describe('Five tests for Express single-resource http server', () => {
