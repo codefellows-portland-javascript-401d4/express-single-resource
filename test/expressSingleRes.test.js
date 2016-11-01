@@ -3,7 +3,7 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const assert = require('chai').assert;
 const expect = require('chai').expect;
-const index = require('../lib/index');
+const routes = require('../routes/citiesRoutes');
 const path = require('path');
 const rimraf = require('rimraf');
 const mkdirp = require('mkdirp');
@@ -11,7 +11,7 @@ const mkdirp = require('mkdirp');
 const citiesDir = path.resolve(__dirname, '../cities');
 
 describe('http server functionality', () => {
-    let req = chai.request(index);
+    let req = chai.request(routes);
 
     before(() => {
         rimraf.sync(citiesDir);

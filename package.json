@@ -2,7 +2,7 @@
   "name": "express-single-resource",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "lint": "eslint **/*.js",
     "pretest": "npm run lint",
