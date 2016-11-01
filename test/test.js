@@ -6,7 +6,7 @@ describe ('logger middleware', () => {
     before (() => {
         const log = m => {message = m };
         logger = createLogger(log);
-    })
+    });
 
     it('logs url and path', () => {
         let message;
