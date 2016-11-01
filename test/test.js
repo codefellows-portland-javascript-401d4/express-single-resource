@@ -3,22 +3,33 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const assert = require('chai').assert;
 const expect = require('chai').expect;
-const server = require('../lib/taco_server');
+const app = require('../lib/taco_express');
 const port = 5000;
 
 
-describe('server', () => {
+describe('app', () => {
 
     before(done => {
-        server.listen(port, done);
+        app.listen(port, done);
     });
 });
 
-describe('Test http single resource', () => {
+describe('Test express single resource', () => {
 
-    let request = chai.request(server);
+    let request = chai.request(app);
 
-    it('GET request to /tacos, where resources are stored - server writes response text, a list of resources in the directory', done => {
+    it('GET request to root directory, serves up static file (index.html)', done => {
+        request
+          .get('/')
+          .end((err, response) => {
+              if(err) return done(err);
+              expect(response).to.be.html;
+              expect(response).to.have.status(200);
+              done();
+          });
+    });
+
+    it('GET request to /tacos, where resources are stored - app writes response text, a list of resources in the directory', done => {
         request
           .get('/tacos')
           .end((err, response) => {
@@ -29,7 +40,7 @@ describe('Test http single resource', () => {
           });
     });
 
-    it('GET request for resource at /tacos/pollo - server writes response text, which is the contents of the resource', done => {
+    it('GET request for resource at /tacos/pollo - app writes response text, which is the contents of the resource', done => {
         request
           .get('/tacos/pollo')
           .end((err, response) => {
@@ -40,7 +51,7 @@ describe('Test http single resource', () => {
           });
     });
 
-    it('POST request to /tacos/pescado - server writes response text and creates a new resource, whose contents are the parsed body of the request', done => {
+    it('POST request to /tacos/pescado - app writes response text and creates a new resource, whose contents are the parsed body of the request', done => {
         request
           .post('/tacos/pescado')
           .send({"tortilla":"corn","filling":"fish"})
@@ -52,7 +63,7 @@ describe('Test http single resource', () => {
           });
     });
 
-    it('PUT request to tacos/pescado - server writes response text and creates a new resource (if not already existing) or updates an existing resource. The updated contents of the resource are the parsed body of the request', done => {
+    it('PUT request to tacos/pescado - app writes response text and creates a new resource (if not already existing) or updates an existing resource. The updated contents of the resource are the parsed body of the request', done => {
         request
           .put('/tacos/pescado')
           .send({"tortilla":"corn","filling":"fish","salsa":"tomatillo","cheese":"cotija"})
@@ -64,7 +75,7 @@ describe('Test http single resource', () => {
           });
     });
 
-    it('DELETE request to tacos/pescado - server writes response text and deletes resource', done => {
+    it('DELETE request to tacos/pescado - app writes response text and deletes resource', done => {
         request
           .delete('/tacos/pescado')
           .end((err, response) => {
