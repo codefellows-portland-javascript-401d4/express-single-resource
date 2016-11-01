@@ -2,21 +2,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+     <link rel="stylesheet" href="main.css">
     <meta charset="UTF-8">
     <title>World Capital Database</title>
 </head>
 <body>
     <h1>Mugsy's Express World Capital Database</h1>
-    <form>
 <!--now uses the post method.  Make that Work.-->
-        <form id="capital-form" action="/post" method="post">
+        <form id="capital-form" action="/" method="post">
   Country:<br>
-  <input type="text" name="country-entry">
+  <input type="text" name="country">
   <br>
   Capital:<br>
-  <input type="text" name="capital-entry">
+  <input type="text" name="capital">
   <br><br>
-  <input type="submit" id ="'input-submit" value="Submit">
+  <input type="submit" id ="input-submit" value="Submit">
 </form>
 <br>
 <a href ="/capitals"><button id ="show-capitals">Show Capitals</button></a>
