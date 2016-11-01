@@ -1,4 +1,4 @@
-const bodyParser = require( '../lib/body-parser' )();
+const bodyParser = require( '../lib/body_parser' )();
 const assert = require( 'chai' ).assert;
 const EventEmitter = require('events');
 
