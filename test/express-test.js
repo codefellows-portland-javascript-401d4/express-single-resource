@@ -6,7 +6,7 @@ const assert = chai.assert;
 const fileStore = require('../lib/file-store/fileStore');
 chai.use(chaiHttp);
 
-describe('Our server responds to requests', done => {
+describe('Server responds to requests', () => {
 
   let locHost = 'http://localhost:3000';
   let testTeam1 = {"teamName":"Natus Vincere","teamMembers":["Ditya Ra","Dendi","GeneRaL","SoNNeikO","Artstyle"],"region":"EU","tiWinner":true,"id":1};
