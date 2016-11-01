@@ -14,7 +14,7 @@ describe('Our server responds to requests', done => {
     before(done => {
         rimraf('./lib/dotaTeams/*', err => {
             if (err) throw err;
-                done();
+            done();
         });
     });
 
