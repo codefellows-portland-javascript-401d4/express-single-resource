@@ -72,9 +72,9 @@ handlers.put = (req, res, id) => {
           } else {
               return bodyReader(req, (err, team) => {
                   if (err) {
-                    console.log('body-reader replace-handler err');
-                    res.statusCode = 400;
-                    res.end(err.message);
+                      console.log('body-reader replace-handler err');
+                      res.statusCode = 400;
+                      res.end(err.message);
                   } else {
                       fileStore.updateFile(team, id)
                       .then(data => {
@@ -88,14 +88,14 @@ handlers.put = (req, res, id) => {
                           console.log('replace catch err');
                           res.end(err);
                       });
-                }
-            });
-        }
-    })
-    .catch(err => {
-        console.log('PUT catch error');
-        res.end(err);
-    });
+                  }
+              });
+          }
+      })
+      .catch(err => {
+          console.log('PUT catch error');
+          res.end(err);
+      });
 };
 
 handlers.remove = (req, res, id) => {
