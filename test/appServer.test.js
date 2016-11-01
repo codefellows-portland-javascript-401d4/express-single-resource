@@ -149,11 +149,8 @@ describe('http single resource promise server', () => {
         request
             .del('/cats/non-existent-cat')
             .end((err, res) => {
-                if (err) return done(err);
-                else {
-                    assert.equal(res.text, '<h1>No such file exists</h1>');
-                    done();
-                }
+                assert.equal(err.response.body.error, '<h1>No such file exists</h1>');
+                done();
             });
     }); 
 });
