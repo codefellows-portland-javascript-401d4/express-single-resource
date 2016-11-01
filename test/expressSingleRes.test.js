@@ -20,7 +20,6 @@ describe('http server functionality', () => {
 
     const dushanbe = {name: 'dushanbe'};
     let stringDush = JSON.stringify(dushanbe);
-    console.log(stringDush);
 
     it('accesses empty file before initial POST', done => {
         req
