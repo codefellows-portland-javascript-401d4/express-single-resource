@@ -16,6 +16,7 @@ describe('http single resource promise server', () => {
     it('checks to see that we can retrieve a given cat with GET', done => {
         request
             .get('/cats/1')
+            .set('Content-Type', 'application/json')
             .end((err, res) => {
                 if (err) return done(err);
                 else {
@@ -28,6 +29,7 @@ describe('http single resource promise server', () => {
     it('checks to see that we can retrieve a given cat with GET using a promise chain', () => {
         request
             .get('/cats/1')
+            .set('Content-Type', 'application/json')
             .then(data => {
                 assert.deepEqual(data.body, {'id':'nyan','age':5,'color':'gray and poptart'});
             })
@@ -39,10 +41,11 @@ describe('http single resource promise server', () => {
     it('wants to see if we get a list of all resources', done => {
         request
             .get('/cats')
+            .set('Content-Type','application/json')
             .end((err, res) => {
                 if (err) return done(err);
                 else {
-                    assert.deepEqual(res.text.split(','), ['0.json', '1.json', '2.json']);
+                    assert.deepEqual(res.body.data, ['0.json', '1.json', '2.json']);
                     done();
                 };
             });
@@ -65,6 +68,7 @@ describe('http single resource promise server', () => {
     it('checks to see that the last file was updated during PUT operation', done => {
         request
             .get('/cats/0')
+            .set('Content-Type', 'application/json')
             .end((err, res) => {
                 if (err) return done(err);
                 else {

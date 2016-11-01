@@ -1,10 +1,10 @@
-#HTTP Page Single Resource Getter with Promises!
+#Single Page Resource Promises and Express!
 
--I promise this will work!
+-I promise this will work expressly!
 
 ###Author
 
-Chris Bruner and Niilo Smeds
+Chris Bruner
 
 ###Version
 
@@ -28,7 +28,7 @@ To talk to the server, which will be held on localhost, you need to specificy yo
 
     -All requests must be directed to the cats API, where :id is the unique id given for each resource at the time of creation http://localhost:8999/cats/:id
 
--Code Example of a GET request using SuperAgent on ECMA 6:
+-Code Example of a GET request using SuperAgent on Javascript ECMA6:
 
 ```javascript
 

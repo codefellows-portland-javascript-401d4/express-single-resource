@@ -4,7 +4,10 @@
   "description": "refactoring http single resource using express",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretest": "eslint ./",
+    "test": "mocha ./test/appServer.test.js",
+    "test:watch": "mocha ./test/appServer.test.js -w",
+    "lint": "eslint ./"
   },
   "repository": {
     "type": "git",
@@ -24,6 +27,7 @@
   },
   "dependencies": {
     "express": "^4.14.0",
+    "pug": "^2.0.0-beta6",
     "sander": "^0.5.1"
   }
 }
