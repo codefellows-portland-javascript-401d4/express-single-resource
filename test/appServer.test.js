@@ -26,6 +26,21 @@ describe('http single resource promise server', () => {
             });
     });
 
+    it('checks to see that we get text/html data for a cat when not specifying application/json in GET', done => {
+        request
+            .get('/cats/1')
+            .end((err, res) => {
+                if (err) return done(err);
+                else {
+                    assert.deepEqual(res.text, '<html><head><title>Returned Data' +
+                    '</title></head><body><h1>This is your requested Data<p>Cat\'s name:' +
+                    ' nyan</p><p>Cat\'s age: 5</p><p>Cats\'s fur color: gray and poptart' +
+                    '</p></h1></body></html>');
+                    done();
+                };
+            });
+    });
+
     it('checks to see that we can retrieve a given cat with GET using a promise chain', () => {
         request
             .get('/cats/1')
@@ -59,7 +74,7 @@ describe('http single resource promise server', () => {
             .end((err, res) => {
                 if (err) return done(err);
                 else {
-                    assert.equal(res.text, 'put good, your resource id is 0');
+                    assert.equal(res.text, '<h1>put good, your resource id is 0</h1>');
                     done();
                 }
             });
@@ -86,7 +101,7 @@ describe('http single resource promise server', () => {
             .end((err, res) => {
                 if (err) return done(err);
                 else {
-                    assert.equal(res.text, 'post good, your resource id is 3');
+                    assert.equal(res.text, '<h1>post good, your resource id is 3</h1>');
                     done();
                 };
             });
@@ -100,7 +115,7 @@ describe('http single resource promise server', () => {
             .end((err, res) => {
                 if (err) return done(err);
                 else {
-                    assert.equal(res.text, 'put good, your resource id is 8');
+                    assert.equal(res.text, '<h1>put good, your resource id is 8</h1>');
                     done();
                 }
             });
@@ -112,7 +127,7 @@ describe('http single resource promise server', () => {
             .end((err, res) => {
                 if (err) return done(err);
                 else {
-                    assert.equal(res.text, 'File was deleted');
+                    assert.equal(res.text, '<h1>File was deleted</h1>');
                     done();
                 }
             });
@@ -124,7 +139,7 @@ describe('http single resource promise server', () => {
             .end((err, res) => {
                 if (err) return done(err);
                 else {
-                    assert.equal(res.text, 'File was deleted');
+                    assert.equal(res.text, '<h1>File was deleted</h1>');
                     done();
                 }
             });
@@ -136,7 +151,7 @@ describe('http single resource promise server', () => {
             .end((err, res) => {
                 if (err) return done(err);
                 else {
-                    assert.equal(res.text, 'No such file exists');
+                    assert.equal(res.text, '<h1>No such file exists</h1>');
                     done();
                 }
             });

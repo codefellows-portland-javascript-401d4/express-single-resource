@@ -14,9 +14,11 @@ v1.0.0
 
 -To return a list of all available files, simply go to url /cats
 
--To return a specifc url, we you must use an ID as part of the URL (e.g. /cats/1, /cats/2, etc.)
+-To return a specifc resource, we you must use an ID as part of the URL (e.g. /cats/1, /cats/2, etc.)
 
--To PUT data in, you must send a JSON file (emphasis on this) with requested id number (e.g. cats/1)
+    -Note: if you wish to view the application/json, you must designate this in your headers otherwise resources will be returned in text/html
+
+-To PUT data in, you must send a JSON file (emphasis on this) and set the Headers to 'package/json' with requested id number (e.g. cats/1)
 
 -To POST, you must send a JSON file, and direct the url to /cats otherwise it will not work and return an error
 
@@ -35,7 +37,8 @@ To talk to the server, which will be held on localhost, you need to specificy yo
 const request = require('superagent');
 
 request
-    .get('http://localhost:8999/0')
+    .get('http://localhost:8999/cats/0')
+    .set('Content-Type', 'application/json')
     .end((err,data) => {
         if (err) return err;
         else console.log(data);
