@@ -4,7 +4,7 @@ const fs = require('../fsFuncs');
 const bodyParser = require('../bodyParser');
 
 router
-    .get('/cities', (req, res) => {
+    .get('/cities', (req, res, next) => {
         fs.getFileList()
             .then((files) => {
                 res.writeHead(200, {'Content-Type': 'text/plain'});
@@ -13,11 +13,12 @@ router
                 });
                 res.end();
             })
-            .catch((err) => {
-                res.writeHead(400, {'Content-Type': 'text/plain'});
-                res.write(err.message);
-                res.end();
-            });
+            // .catch((err) => {
+            //     res.writeHead(400, {'Content-Type': 'text/plain'});
+            //     res.write(err.message);
+            //     res.end();
+            // });
+            .catch(next);
     })
 
     .get('/cities/:id', (req, res) => {

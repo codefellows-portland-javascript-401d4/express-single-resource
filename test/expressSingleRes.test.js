@@ -7,6 +7,26 @@ const routes = require('../routes/citiesRoutes');
 const path = require('path');
 const rimraf = require('rimraf');
 const mkdirp = require('mkdirp');
+const EventEmitter = require('events');
+
+const bodyParser = require('../bodyParser');
+
+describe('body parser functionality', () => {
+    it('parses JSON body', () => {
+        const req = new EventEmitter();
+        let dushanbe = {name: 'dushanbe'};
+        let stringDush = JSON.stringify(dushanbe);
+        let nextCalled = false;
+        const next = () => {
+            nextCalled = true;
+        };
+        bodyParser(req, null, next);
+        req.emit('data', `${stringDush}`);
+        req.emit('end');
+        assert.deepEqual(req.body, dushanbe);
+        assert.isOk(nextCalled, 'next be called');
+    });
+});
 
 const citiesDir = path.resolve(__dirname, '../cities');
 
@@ -18,7 +38,7 @@ describe('http server functionality', () => {
         mkdirp.sync(citiesDir);
     });
 
-    const dushanbe = {name: 'dushanbe'};
+    let dushanbe = {name: 'dushanbe'};
     let stringDush = JSON.stringify(dushanbe);
 
     it('accesses empty file before initial POST', done => {
