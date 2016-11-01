@@ -3,13 +3,13 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const assert = require('chai').assert;
 const expect = require('chai').expect;
-const routes = require('../routes/citiesRoutes');
+const routes = require('../lib/routes/citiesRoutes');
 const path = require('path');
 const rimraf = require('rimraf');
 const mkdirp = require('mkdirp');
 const EventEmitter = require('events');
 
-const bodyParser = require('../bodyParser');
+const bodyParser = require('../lib/bodyParser');
 
 describe('body parser functionality', () => {
     it('parses JSON body', () => {
@@ -28,7 +28,9 @@ describe('body parser functionality', () => {
     });
 });
 
-const citiesDir = path.resolve(__dirname, '../cities');
+const citiesDir = path.join(__dirname, '../cities');
+console.log('dirname: ', __dirname);
+console.log('citiesDir: ', citiesDir);
 
 describe('http server functionality', () => {
     let req = chai.request(routes);
