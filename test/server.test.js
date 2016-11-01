@@ -19,12 +19,12 @@ describe('http-server', () => {
 
   it('successfully posts a resource', done => {
     request
-      .post('/it-doesnt-matter')
+      .post('/notes')
       .send({ title: 'cat', body: 'get your cat' })
       .end((err, res) => {
         if(err) return done(err);
         assert.isOk(fs.existsSync('./notes/cat.json'));
-        assert.equal(res.text, 'cat : get your cat');
+        assert.equal(res.text, 'You have posted : \n cat : get your cat');
         done();
       });
   });
@@ -39,7 +39,34 @@ describe('http-server', () => {
       });
   });
 
-  // it('responds correctly to a "GET" request on all resources', done => {
-  //   done();
-  // });
+  request
+    .post('/notes')
+    .send({ title: 'mail', body: 'get your mail' })
+    .end(() => console.log('we added another resource'));
+
+  request
+    .post('/notes')
+    .send({ title: 'trash', body: 'get your trash' })
+    .end(() =>  console.log('we added another resource'));
+
+  it('responds correctly to a "GET" request on all resources', done => {
+    request
+      .get('/notes')
+      .end((err, res) => {
+        if(err) return done(err);
+        assert.include(res.text, 'cat');
+        assert.include(res.text, 'mail');
+        assert.include(res.text, 'trash');
+        done();
+      });
+  });
+
+  it('responds correcty to a PUT request', done => {
+    done();
+  });
+
+  it('responds correctly to a delete request', done => {
+    done();
+  });
+  
 });
