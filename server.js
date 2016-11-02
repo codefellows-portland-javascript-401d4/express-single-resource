@@ -1,4 +1,4 @@
-const app = require('./lib/server-http');
+const app = require('./lib/app');
 const http = require('http');
 const port = process.env.PORT || 3000;
 
