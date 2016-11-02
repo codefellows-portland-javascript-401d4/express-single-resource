@@ -31,10 +31,11 @@ describe('storageScoutFiles api', () => {
     it('creates a file for /POST request', done => {
         request
             .post('/herding-group')
-            .send(testData)
+            .send(JSON.stringify(testData))
             .then(response => {
-                const file = response.body.id
-                assert.equal(file, testData.id);
+                const parse = JSON.parse(response.text);
+                testData.id = parse.id
+                assert.deepEqual(parse, testData);
                 done();
             })
             .catch(done);
@@ -44,25 +45,11 @@ describe('storageScoutFiles api', () => {
         request
             .get(`/herding-group/${testData.id}`)
             .then(response => {
-                const breed = response.body;
-                assert.deepEqual(breed, testData);
+                const parse = JSON.parse(response.text);
+                assert.deepEqual(parse, testData);
                 done();
             })
             .catch(done);
-        });
-    });
-
-    it.skip('creates file for POST request', () => {
-        return chai.request(server)
-        .post('/')
-        .send(testData)
-        .then(response => {
-            assert.equal(response.statusCode, 200);
-            assert.notEqual(response.stausCode, 400);
-        })
-        .catch(error => {
-            console.log('Error: POST request failed');
-            throw error;
         });
     });
 
