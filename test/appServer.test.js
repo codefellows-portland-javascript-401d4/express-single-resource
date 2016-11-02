@@ -107,6 +107,17 @@ describe('http single resource promise server', () => {
             });
     });
 
+    it('wants to see if error will propagate if giving invalid data', done => {
+        request
+            .post('/cats')
+            .set('Content-Type', 'application/json')
+            .send('hi')
+            .end((err, res) => {
+                assert.equal(err.response.body.error, '<h1>Invalid JSON</h1>');
+                done();
+            });
+    });
+
     it('wants to see if PUT will act like POST if file is not present', done => {
         request
             .put('/cats/8')
