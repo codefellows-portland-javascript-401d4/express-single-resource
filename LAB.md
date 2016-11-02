@@ -1,24 +1,51 @@
-![cf](http://i.imgur.com/7v5ASc8.png) expressjs-single-resource-api
+![cf](http://i.imgur.com/7v5ASc8.png) http-single-resource
 ====
 
 ## Description
 
-For this assignment, rewrite your [`http-single-resource` assignment](../../../http-single-resource/blob/master/LAB.md)
-using ExpressJS.
+For this assignment, write an http server that will hanlde a single resource, 
+backed by a persistant data store. 
 
-Go ahead and cut and paste your data storage module(s) into this project (or publish it on npm!), you shouldn't
-need to rewrite those!
+It should respond to GET, POST, PUT and DELETE requests for a named resource of your choosing, for example "notes":
 
-You API E2E tests should also be usable "as-is". Though correctness trumps re-use.
+* `GET` - A get request sent to `/notes` should respond with a list of all
+of the notes that have been saved thus far. A get request sent to 
+`/notes/name_of_resource` should respond with that resource.
 
-All requirements are still in play.
+* `POST` - The in-coming post request body should be saved 
+to storage. For example if a request 
+is sent to `/notes` with a body of `{ noteBody: 'hello world' }` the store
+would now contain an object from that data.
 
-## Bonus
+* `PUT` - The data coming in should be saved to the named resource either
+creating or updating in entirety. So a request to `/notes/name_of_resources`
+is idempotent in that the contents in the body of the request always become
+the new data for that resource.
 
-Create static files and/or rendered templates that allow you to exercise your API: 5pts
+* `DELETE` - The corresponding resource should be removed. `notes/name_of_resource`
+would remove resource `name_of_resource`
+
+Respond with appropriate status code (`400`, `404`, etc.) and content type (`application/json`)
+
+For `POST` and `PUT` you'll need to ready the body!
+
+For your data store:
+* any promise enabled store
+  * https://www.npmjs.com/package/fs-extra-promise
+  * https://www.npmjs.com/package/sander
+  * your file store
+  * firebase?
+  * ?
+
+The api exposed by the server should be E2E tested with `chai-http`
 
 #### Rubric:
-* Correctly working CRUD API: 3pts
-* Code Quality: 2pts
-* Express Implementation: 3pts
-* Project Organization and Testing: 2pts
+* Promises: 4pts
+* Design/Organziation: 2pts
+* "Routing": 2pts
+* "Routing" Testing: 2pts
+
+## Bonus Points For More Fun:
+
+* App: *3pts*
+	* Serve an index.html that displays data and allows users to manipulate using api methods
