@@ -18,7 +18,7 @@ describe('Five tests for Express single-resource http server', () => {
             .get('/DoesNotExist')
             .end((err, res) => {
               // if (err) return done(err); it IS an error; need to verify proper response
-              assert.equal(res.text, 'Route not found!');
+              assert.equal(res.text, 'Page not found!');
               done();
             });
   });
@@ -94,5 +94,17 @@ describe('Five tests for Express single-resource http server', () => {
             });
      }); 
   });
+
+  it('bad POST - confirms error handling for a bad request', done => {
+    newTeam = 'not proper JSON';   
+    request
+     .post('/teams')
+     .send(newTeam)
+     .end((err, res) => {
+      //  if (err) return done(err);
+       assert.equal(res.text, '{"error":"Bad Request!"}');
+       done();
+     });
+  }); 
 
 });
