@@ -88,7 +88,7 @@ describe('Our server responds to requests', done => {
             assert.equal(arr.length, 0);
         })
         .catch(err => {
-            console.log('DELETE test err');
+            console.log('Error Testing DELETE', err);
             throw err;
         });
     });
