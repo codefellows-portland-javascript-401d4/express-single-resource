@@ -24,7 +24,7 @@ describe('Express server - errorHandler middleware', () => {
       });
   });
 
-  it('hit the server with a bad route and gets a 400 error', done => {
+  it('gets a 500 error when calling the error handler', done => {
 
     var err = {};
     var req = {};
@@ -33,7 +33,22 @@ describe('Express server - errorHandler middleware', () => {
       assert.equal(code, 500);
       done();
     };
+    res.send = function() {
+    };
+
+    errorHandler(err, req, res, null);
+
+  });
+
+  it('gets a message when calling the error handler', done => {
+
+    var err = { code: 500 };
+    var req = {};
+    var res = {};
+    res.status = function() {};
     res.send = function(err) {
+      assert.equal(err.error, 'Internal Server Error');
+      done();
     };
 
     errorHandler(err, req, res, null);
