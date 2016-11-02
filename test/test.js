@@ -15,17 +15,16 @@ describe('unit testing the readBody module', () => {
 
     const next = () => {
       // test that body was added to req
-      expect(JSON.stringify(res.body)).to.equal('one big string');
+      expect(res.body).to.deep.equal({body: 'one big string'});
       done();
     };
     const req = new EventEmitter();
-    req.body = 'three small words';
 
     // mock data
     readBody(req, res, next);
-    req.emit('data', req.body);
-    // req.emit('data', 'big');
-    // req.emit('data', 'string');
+    req.emit('data', '{"body": "one big string"}');
+    // req.emit('data', '{"body": "big"}');
+    // req.emit('data', '{"body": "string"}');
     req.emit('end');
 
   });
