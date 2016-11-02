@@ -4,7 +4,7 @@ const server = require('../index.js');
 const rimraf = require('rimraf');
 const mkdirp = require('mkdirp');
 const assert = chai.assert;
-const fileStore = require('../lib/dotaTeam');
+const fileStore = require('../lib/models/dotaTeam');
 chai.use(chaiHttp);
 
 describe('Our server responds to requests', done => {
@@ -28,7 +28,7 @@ describe('Our server responds to requests', done => {
 
     it('Should make a file from a POST request', () => {
         return chai.request(locHost)
-        .post('/teams')
+        .post('/api/teams')
         .send(testTeam1)
         .then(res => {
             assert.equal(res.statusCode, 201);
@@ -42,7 +42,7 @@ describe('Our server responds to requests', done => {
 
     it('Should retrieve a single file from a GET request', () => {
         return chai.request(locHost)
-        .get('/teams/1')
+        .get('/api/teams/1')
         .then(res => {
             assert.deepEqual(res.body, testTeam1);
         })
@@ -54,7 +54,7 @@ describe('Our server responds to requests', done => {
 
     it('Should retrieve all files from GET request to /teams', () => {
         return chai.request(locHost)
-        .get('/teams')
+        .get('/api/teams')
         .then(res => {
             assert.isArray(res.body);
         })
@@ -66,7 +66,7 @@ describe('Our server responds to requests', done => {
 
     it('Should update a file from a PUT request', () => {
         return chai.request(locHost)
-        .put('/teams/1')
+        .put('/api/teams/1')
         .send({"teamName": "Navi"})
         .then(res => {
             assert.deepEqual(res.body, {"teamName":"Navi", "id":"1"});
@@ -79,7 +79,7 @@ describe('Our server responds to requests', done => {
 
     it('Should delete a file from a DELETE request', () => {
         return chai.request(locHost)
-        .del('/teams/1')
+        .del('/api/teams/1')
         .then(res => {
             assert.equal(res.statusCode, 200);
             return fileStore.readDir('./lib/dotaTeams');
