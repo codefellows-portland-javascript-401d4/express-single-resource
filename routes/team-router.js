@@ -30,4 +30,4 @@ router
     });
 
 
-module.export = router;
+module.exports = router;
