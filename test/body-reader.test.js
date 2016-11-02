@@ -10,7 +10,7 @@ describe('body reader unit test', () => {
 
 
 
-    it.only('parses the data', done => {
+    it('parses the data', done => {
 
         const req = new EventEmitter();
         const next = () => {
