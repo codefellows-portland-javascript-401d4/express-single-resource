@@ -1,15 +1,42 @@
 const server = require('../lib/server');
 const dataStore = require('../lib/dataStore');
+const readBody = require('../lib/readBody');
 
+const EventEmitter = require('events');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const expect = chai.expect;
 chai.use(chaiHttp);
 
+//unit tests on the readBody
+describe('unit testing the readBody module', () => {
+  it('parses the body', done  => {
+    var res = {};
+
+    const next = () => {
+      // test that body was added to req
+      expect(JSON.stringify(res.body)).to.equal('one big string');
+      done();
+    };
+    const req = new EventEmitter();
+    req.body = 'three small words';
+
+    // mock data
+    readBody(req, res, next);
+    req.emit('data', req.body);
+    // req.emit('data', 'big');
+    // req.emit('data', 'string');
+    req.emit('end');
+
+  });
+
+
+});
+
 //unit tests on the dataStore
 describe('unit testing the dataStore module', () => {
   it('reads a directory', () => {
-    dataStore.retrieveDir('/notes')
+    dataStore.retrieveDir('./notes')
       .then((dirList) => {
         expect(dirList).to.equal([ 'test1.json', 'test2.json' ]);
       })
@@ -18,8 +45,8 @@ describe('unit testing the dataStore module', () => {
       });
   });
 
-  it('reads a file', ()=> {
-    dataStore.retrieveFile('/notes/test1.json')
+  it('reads a file', () => {
+    dataStore.retrieveFile('test1')
       .then((fileData) => {
         expect(fileData).to.be.equal({ 'title': 'test1.json', 'text': 'Dinner is consistent, the chicken comes out golden every time' });
       })
@@ -56,7 +83,7 @@ describe('E2E testing the server', () => {
 
   it('sends response to request for specific file', () => {
     chai.request(server)
-      .get('/notes/test1.json')
+      .get('test1')
       .then((res) => {
         expect(res.text).to.equal('{\n  "title": "test1.json",\n  "text": "Dinner is consistent, the chicken comes out golden every time"\n}');
       })
@@ -79,7 +106,7 @@ describe('E2E testing the server', () => {
 
   it('sends response to POST request for specific file', () => {
     chai.request(server)
-      .post('/notes/test3.json')
+      .post('test3')
       .then((res) => {
         expect(res);
       })
@@ -90,7 +117,7 @@ describe('E2E testing the server', () => {
 
   it('sends response to PUT request for specific file', ()=> {
     chai.request(server)
-      .put('/notes/test3.json')
+      .put('test3')
       .then((res) => {
         expect(res);
       })
@@ -101,7 +128,7 @@ describe('E2E testing the server', () => {
 
   it('sends response to DELETE request for specific file', () => {
     chai.request(server)
-      .delete('/notes/test3.json')
+      .delete('test3')
       .then((res) => {
         expect(res);
       })
