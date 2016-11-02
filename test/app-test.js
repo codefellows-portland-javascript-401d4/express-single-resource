@@ -13,17 +13,15 @@ let filename = 'teamsTest.json';
 
 describe('Five tests for Express single-resource http server', () => {
 
-  // No longer need this one as Express always deals with non-existent paths
-
-  // it('error message on non-existent path', done => {
-  //   request
-  //           .get('/DoesNotExist')
-  //           .end((err, res) => {
-  //             if (err) return done(err);
-  //             assert.equal(res.text, '404 - Not Found');
-  //             done();
-  //           });
-  // });
+  it('error message on non-existent path', done => {
+    request
+            .get('/DoesNotExist')
+            .end((err, res) => {
+              // if (err) return done(err); it IS an error; need to verify proper response
+              assert.equal(res.text, 'Route not found!');
+              done();
+            });
+  });
 
   it('a path (/teams) uses url.pathname', done => {
     request
