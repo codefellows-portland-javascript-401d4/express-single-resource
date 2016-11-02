@@ -4,7 +4,7 @@ chai.use(chaiHttp);
 const assert = chai.assert;
 const server = require('../lib/app');
 // const sander = require('sander');
-const handler = require('../lib/handler');
+const router = require('../lib/routes/superheros');
 
 const testData = {"hero": "Risa", "race": "awesome", "vehicle": "Crown Vic"};
 
@@ -17,7 +17,7 @@ describe('testing server.js', () =>{
     });
 
     it('serves up an index page', done =>{
-        request.get('/').end((err, res) =>{
+        request.get('/superheros').end((err, res) =>{
             if (err) return done (err);
             assert.include(res.text, 'Welcome to our home page');
             done();
@@ -25,9 +25,9 @@ describe('testing server.js', () =>{
     });
 
     it('GETs a single item', done => {
-        request.get('/?1477949213282').end((err, res) => {
+        request.get('/superheros/1477949180300').end((err, res) => {
             if (err) return done (err);
-            assert.include(res.text, '"hero":"Wonder Woman"');
+            assert.include(res.text, '"hero":"Flash"');
             done();
         });
     });
@@ -37,11 +37,11 @@ describe('testing server.js', () =>{
         const response = {end: (hope) => {
             assert.equal(hope, request.params.id);
         }};
-        handler.post(request, response);
+        router.post(request, response);
     });
     it('creates file for POST request', () => {
         return chai.request(server)
-     .post('/')
+     .post('/superheros')
      .send(testData)
      .then(response => {
          assert.equal(response.statusCode, 200);
@@ -53,10 +53,10 @@ describe('testing server.js', () =>{
      });
     });
     it('deletes file', () => {
-        const request = {params:{id:1477949119174}};
+        const req = {params:{id:1477949119174}};
         const response = {end: (hope) => {
-            assert.equal(hope, request.params.id);
+            assert.equal(hope, req.params.id);
         }};
-        handler.delete(request, response);
+        request.delete(req, response);
     });
 });
