@@ -5,10 +5,11 @@ const assert = chai.assert;
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
-const path = require('path');
 const storageScout = require('storage-scout');
 
 const app = require('../lib/app');
+const EventEmitter = require('events');
+const bodyReader = require('../lib/bodyReader')();
 
 describe('storageScoutFiles api', () => {
     const request = chai.request(app);
