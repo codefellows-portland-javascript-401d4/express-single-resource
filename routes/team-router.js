@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const team = require('../team')
-const bodyParser = require('./lib/bodyParser');
+// const team = require('../team')
+const bodyParser = require('../lib/bodyParser');
 
 
 router
@@ -23,14 +23,10 @@ router
             .catch(err => console.log(err));
     })
 
-    .post('/team', (req, res) => {
-        let body = '';
-        req.on('data', data => body += data);
-        req.on('end', () => {
-            store.save(JSON.parse(body))
-                .then(id => res.send({ id: id }))
-                .catch(err => console.log(err))
-        })
+    .post('/', bodyParser, (req, res, next) => {
+        store.save(JSON.parse(body))
+            .then(id => res.send({ id: id }))
+            .catch(err => console.log(err))
     });
 
 
