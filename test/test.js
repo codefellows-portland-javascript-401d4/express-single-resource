@@ -8,7 +8,6 @@ chai.use(chaiHttp);
 const storageScout = require('storage-scout');
 
 const app = require('../lib/app');
-const EventEmitter = require('events');
 const bodyReader = require('../lib/bodyReader')();
 
 describe('storageScoutFiles api', () => {
