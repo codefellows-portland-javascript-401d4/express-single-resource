@@ -24,7 +24,7 @@ router
     })
 
     .post('/', bodyParser, (req, res, next) => {
-        store.save(JSON.parse(body))
+        store.save(res.body)
             .then(id => res.send({ id: id }))
             .catch(err => console.log(err))
     });
