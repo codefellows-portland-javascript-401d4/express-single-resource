@@ -1,31 +1,42 @@
 /** Created by Gloria Anholt on 11/1/16. **/
 
 const chai = require('chai');
-const assert = require('chai').assert;
-const EventEmitter = require('events');
+const assert = chai.assert;
+const chaiHttp = require('chai-http');
+chai.use(chaiHttp);
 
+const app = require('../lib/app');
 const errorHandler = require('../lib/error-handler');
-
 
 describe('Express server - errorHandler middleware', () => {
 
-  it('accumulates gets a 500 error', done => {
+  const server = chai.request(app);
 
-    // create the dummy error -- should receive default values
+  it('hit the server with a bad request and gets a 404 error', done => {
+
+    server
+      .get('/api/city/las_vegas')
+      .end((err, res)=> {
+        if (err) {
+          assert.equal(res.status, 404);
+          done();
+        }
+      });
+  });
+
+  it('hit the server with a bad route and gets a 400 error', done => {
+
     var err = {};
+    var req = {};
     var res = {};
-
     res.status = function(code) {
-      return code;
-    };
-
-    res.send = function(err) {
-      assert.equal(err.code, 500);
+      assert.equal(code, 500);
       done();
     };
+    res.send = function(err) {
+    };
 
-    // call the handler with an error
-    errorHandler(err, null, res, null);
+    errorHandler(err, req, res, null);
 
   });
 
