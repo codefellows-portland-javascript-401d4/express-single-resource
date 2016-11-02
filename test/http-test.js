@@ -69,7 +69,7 @@ describe('Our server responds to requests', done => {
         .put('/api/teams/1')
         .send({"teamName": "Navi"})
         .then(res => {
-            assert.deepEqual(res.body, {"teamName":"Navi", "id":"1"});
+            assert.deepEqual(res.body, {"teamName":"Navi"});
         })
         .catch(err => {
             console.log('PUT test err');
