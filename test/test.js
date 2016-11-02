@@ -41,7 +41,7 @@ describe('storageScoutFiles api', () => {
             .catch(done);
         });
 
-    it('returns a single file for GET request by id param', done => {
+    it.skip('returns a single file for GET request by id param', done => {
         request
             .get(`/herding-group/${testData.id}`)
             .then(response => {
