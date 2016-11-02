@@ -2,6 +2,7 @@ const chai      = require('chai');
 const chaiHttp  = require('chai-http');
 const assert    = chai.assert;
 const server    = require('../lib/appServer');
+const fs        = require('fs');
 chai.use(chaiHttp);
 
 describe('http single resource promise server', () => {
@@ -164,4 +165,8 @@ describe('http single resource promise server', () => {
                 done();
             });
     }); 
+
+    after(() => {
+        fs.writeFile('./lib/models/resources/0.json', JSON.stringify({id:'felix',age:10,color:'black and white'}));
+    });
 });
