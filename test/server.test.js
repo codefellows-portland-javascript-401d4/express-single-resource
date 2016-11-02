@@ -5,7 +5,7 @@ const assert = chai.assert;
 const fs = require('fs');
 const app = require('../lib/app');
 
-describe('http-server', () => {
+describe('express-server', () => {
   const request = chai.request(app);
   it('responds corrects to a "GET" request on "/"', done => {
     request
@@ -62,11 +62,25 @@ describe('http-server', () => {
   });
 
   it('responds correcty to a PUT request', done => {
-    done();
+    request
+      .put('/notes/cat')
+      .send({ title: 'test', body: 'it worked!' })
+      .end((err, res) => {
+        if(err) return done(err);
+        assert.equal(res.text, 'You have updated a note : \n test : it worked!');
+        done();
+      });
   });
 
   it('responds correctly to a delete request', done => {
-    done();
+    request
+      .delete('/notes/cat')
+      .end((err, res) => {
+        if(err) return done(err);
+        assert.isNotOk(fs.existsSync('./notes/cat.json'));
+        assert.equal(res.text, 'Your note: cat has been deleted!');
+        done();
+      });
   });
-  
+
 });
