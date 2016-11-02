@@ -9,13 +9,13 @@ describe('body parser middleware', () => {
         const req = new EventEmitter();
 
         const next = () => {
-            assert.deepEqual(req.body, { name: "here is some data" });
+            assert.deepEqual(req.body, { taco: "chorizo" });
             done();
         };
 
         bodyParser(req, null, next);
 
-        req.emit('data', '{ "name": "here is some data" }');
+        req.emit('data', '{ "taco": "chorizo" }');
         req.emit('end');
 
     });
