@@ -4,14 +4,17 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const assert = chai.assert;
 const server = require('../lib/app');
+const bodyParser = require( '../lib/body-parser' )();
+const EventEmitter = require('events');
 
 let request = chai.request(server);
+
 //original two-team data resource displayed as text
 let origTeamsText = 'Oakland Athletics\nChicago Cubs\n';
 let basedir = './lib/models/';
 let filename = 'teamsTest.json';
 
-describe('Five tests for Express single-resource http server', () => {
+describe('Seven E2E tests for Express single-resource http server', () => {
 
   it('error message on non-existent path', done => {
     request
@@ -21,6 +24,18 @@ describe('Five tests for Express single-resource http server', () => {
               assert.equal(res.text, 'Page not found!');
               done();
             });
+  });
+
+  it('bad POST - confirms error handling for a malformed request', done => {
+    newTeam = 'not proper JSON';   
+    request
+     .post('/teams')
+     .send(newTeam)
+     .end((err, res) => {
+      //  if (err) return done(err); it IS an error; need to verify proper response
+       assert.equal(res.text, '{"error":"Bad Request!"}');
+       done();
+     });
   });
 
   it('a path (/teams) uses url.pathname', done => {
@@ -95,16 +110,34 @@ describe('Five tests for Express single-resource http server', () => {
      }); 
   });
 
-  it('bad POST - confirms error handling for a bad request', done => {
-    newTeam = 'not proper JSON';   
-    request
-     .post('/teams')
-     .send(newTeam)
-     .end((err, res) => {
-      //  if (err) return done(err);
-       assert.equal(res.text, '{"error":"Bad Request!"}');
-       done();
-     });
-  }); 
-
 });
+
+describe( 'body parser middleware unit testing', () => {
+
+  it( 'parses body', done => {
+    const req = new EventEmitter();
+    const next = () => {
+      assert.deepEqual(req.body, {name: 'Giants', city: 'San Francisco'});
+      done();
+    };
+
+    bodyParser(req, null, next);
+
+    req.emit('data', '{"name": "Giants", "city": "San Francisco"}');
+    req.emit('end');
+
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
