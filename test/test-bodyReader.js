@@ -4,10 +4,10 @@ const EventEmitter = require('events');
 
 describe( 'body reader middleware', () => {
 
-	it( 'parses body', done => {
+    it( 'parses body', done => {
 
         const req = new EventEmitter();
-        
+
         const next = () => {
             // test that body was added to req
             assert.deepEqual(req.body, { "name": "here is some data" });
