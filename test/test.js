@@ -22,7 +22,7 @@ describe('storageScoutFiles api', () => {
         request
             .get('/herding-group')
             .then(response => {
-                assert.deepEqual(response.body, {});
+                assert.deepEqual(request.body, {});
                 done();
             })
             .catch(done);
