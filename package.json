@@ -1,0 +1,33 @@
+{
+  "name": "express-single-resource",
+  "version": "1.0.0",
+  "description": "refactoring http single resource using express",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "eslint ./",
+    "test": "mocha ./test/appServer.test.js",
+    "test:watch": "mocha ./test/appServer.test.js -w",
+    "lint": "eslint ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuantumArchive/express-single-resource.git"
+  },
+  "author": "Chris B.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/QuantumArchive/express-single-resource/issues"
+  },
+  "homepage": "https://github.com/QuantumArchive/express-single-resource#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "eslint": "^3.9.1",
+    "mocha": "^3.1.2"
+  },
+  "dependencies": {
+    "express": "^4.14.0",
+    "pug": "^2.0.0-beta6",
+    "sander": "^0.5.1"
+  }
+}
