@@ -1,7 +1,7 @@
 {
   "name": "express-single-resource",
   "version": "1.0.0",
-  "description": "Express single resource Lab, part1",
+  "description": "Express single resource Lab, part2",
   "main": "server.js",
   "scripts": {
     "test": "npm run test:run",
