@@ -1,8 +1,9 @@
 'use strict';
 
+const chai = require('chai');
 const assert = chai.assert;
 const EventEmitter = require('events');
-const bodyReader = require('../lib/bodyReader')();
+const bodyParser = require('../lib/body-parser')();
 
 describe('body-parser middleware', () => {
     it.skip('parses the body', done => {

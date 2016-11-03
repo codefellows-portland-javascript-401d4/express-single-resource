@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 const storageScout = require('storage-scout');
 
 const app = require('../lib/app');
-const bodyReader = require('../lib/bodyReader')();
+const bodyReader = require('../lib/body-parser')();
 
 describe('storageScoutFiles api', () => {
     const request = chai.request(app);
@@ -41,7 +41,7 @@ describe('storageScoutFiles api', () => {
             .catch(done);
         });
 
-    it.skip('returns a single file for GET request by id param', done => {
+    it('returns a single file for GET request by id param', done => {
         request
             .get(`/herding-group/${testData.id}`)
             .then(response => {
