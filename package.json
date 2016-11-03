@@ -33,6 +33,6 @@
     "path": "^0.12.7",
     "pug": "^2.0.0-beta6",
     "sander": "^0.5.1",
-    "storage-scout": "^0.1.1"
+    "storage-scout": "^0.2.0"
   }
 }
