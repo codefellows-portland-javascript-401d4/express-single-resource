@@ -3,17 +3,29 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const expect = require('chai').expect;
 const assert = require('chai').assert;
-const server = require('../lib/football-server');
+const app = require('../lib/app');
+// const server = require('../lib/football-server');
 const port = 8080;
 
-describe('server', () => {
+describe('app', () => {
     before(done => {
-        server.listen(port, done);
+        app.listen(port, done);
     });
 });
 
-describe('test http server resource', () => {
-    let request = chai.request(server);
+describe('test express server resource', () => {
+    let request = chai.request(app);
+
+    it('static index.html file', done => {
+        request
+            .get('/')
+            .end((err, response) => {
+                if(err) return done(err);
+                expect(response).to.be.html;
+                expect(response).to.have.status(200);
+                done();
+            });
+    });
 
     it('sends back a response text', done => {
         request
@@ -44,7 +56,7 @@ describe('test http server resource', () => {
           .send({"city":"chicago","conference":"nfc"})
           .end((err, response) => {
               if(err) return done(err);
-              assert.deepEqual(response.text, 'data has been written');
+              assert.deepEqual(response.text, 'data has been posted');
               expect(response).to.have.status(200);
               done();
           });
@@ -56,7 +68,7 @@ describe('test http server resource', () => {
           .send({"division":"north"})
           .end((err, response) => {
               if(err) return done(err);
-              assert.deepEqual(response.text, 'data has been updated');
+              assert.deepEqual(response.text, 'data now updated');
               expect(response).to.have.status(200);
               done();
           });
