@@ -7,7 +7,6 @@ const port = process.env.PORT || 8080;
 // const path = require('path');
 // const storeDir = path.join(__dirname, 'teams');
 // store.config(storeDir);
-
 const server = http.createServer(app);
 
 server.listen(port, err => {
