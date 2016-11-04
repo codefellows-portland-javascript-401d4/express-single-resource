@@ -68,7 +68,7 @@ describe('test express server resource', () => {
           .send({"division":"north"})
           .end((err, response) => {
               if(err) return done(err);
-              assert.deepEqual(response.text, 'data now updated');
+              assert.deepEqual(response.text, 'data has been updated');
               expect(response).to.have.status(200);
               done();
           });
