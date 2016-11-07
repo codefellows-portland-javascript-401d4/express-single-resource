@@ -44,7 +44,7 @@ describe('Express http server API', () => {
       'To retrieve a file, please query the file name';
 
     server
-      .get('/city')
+      .get('/api/city')
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.text, testHtml);
@@ -57,7 +57,7 @@ describe('Express http server API', () => {
     const expectedResults = '<html><head><title>City Rental Data</title></head><body><h1>Boston, MA</h1><p>Rental Data for Boston</p><ul><li>Mean one-bedroom price: $2025</li></ul></body></html>';
 
     server
-      .get('/city/boston')
+      .get('/api/city/boston')
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.text, expectedResults);
@@ -71,7 +71,7 @@ describe('Express http server API', () => {
     const expectedResults = 'san_diego.json saved.';
 
     server
-      .post('/city/san_diego')
+      .post('/api/city/san_diego')
       .send({"City":"San Diego","State":"CA","Median_1_BR_price":"$1,500","Median_2_BR_price":"$2,100"})
       .end((err, res) => {
         if (err) return done(err);
@@ -93,7 +93,7 @@ describe('Express http server API', () => {
       'To retrieve a file, please query the file name';
 
     server
-      .get('/city')
+      .get('/api/city')
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.text, testHtml);
@@ -106,7 +106,7 @@ describe('Express http server API', () => {
     const expectedResults = '<html><head><title>City Rental Data</title></head><body><h1>San Diego, CA</h1><p>Rental Data for San Diego</p><ul><li>Median one-bedroom price: $1,500</li></ul></body></html>';
 
     server
-      .get('/city/san_diego.json')
+      .get('/api/city/san_diego.json')
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.text, expectedResults);
@@ -119,7 +119,7 @@ describe('Express http server API', () => {
     const expectedResults = 'san_diego.json deleted successfully.';
 
     server
-      .del('/city/san_diego')
+      .del('/api/city/san_diego')
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.text, expectedResults);
@@ -133,7 +133,7 @@ describe('Express http server API', () => {
     const expectedResults = 'File portland.json saved.';
 
     server
-      .put('/city/portland')
+      .put('/api/city/portland')
       .send({"City":"Portland","State":"OR","Median_1_BR_price":"$1,000","Median_2_BR_price":"$2,000"})
       .end((err, res) => {
         if (err) return done(err);
@@ -155,7 +155,7 @@ describe('Express http server API', () => {
       'To retrieve a file, please query the file name';
 
     server
-      .get('/city')
+      .get('/api/city')
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.text, testHtml);
