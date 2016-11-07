@@ -5,10 +5,10 @@ const assert = chai.assert;
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
-const path = require('path');
 const storageScout = require('storage-scout');
 
 const app = require('../lib/app');
+const bodyReader = require('../lib/body-parser')();
 
 describe('storageScoutFiles api', () => {
     const request = chai.request(app);
@@ -51,8 +51,25 @@ describe('storageScoutFiles api', () => {
             })
             .catch(done);
         });
+
+    it('updates a single file for PUT request by id param', done => {
+        request
+        .put(`/herding-group/${testData.id}`)
+        .send(testData)
+        .then(response => {
+            const parse = JSON.parse(response.text);
+            testData.id = testData.id.toString();
+            assert.deepEqual(parse, testData);
+            done();
+        })
+        .catch(done);
     });
 
-    it.skip('removes a single file by id for DELETE request', () => {
-        request.delete('/');
+    it('removes a single file by id for DELETE request', done => {
+        request
+        .delete(`/herding-group/${testData.id}`)
+        .then(() => {
+            done();
+        });
     });
+});
