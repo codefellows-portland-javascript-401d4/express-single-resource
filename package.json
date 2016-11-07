@@ -1,8 +1,8 @@
 {
   "name": "express-single-resource",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Code Fellows 401 Assignment 2016-10-31",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "pretest": "npm run lint",
     "test": "npm run test:run",
