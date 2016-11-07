@@ -1,0 +1,36 @@
+{
+  "name": "express-single-resource",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "npm run test && node server.js",
+    "pretest": "npm run lint",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mizutombo/express-single-resource.git"
+  },
+  "keywords": [
+    "http",
+    "server"
+  ],
+  "author": "Tom Shultz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mizutombo/express-single-resource"
+  },
+  "homepage": "https://github.com/mizutombo/express-single-resource#LAB",
+  "dependencies": {
+    "express": "^4.14.0",
+    "sander": "^0.5.1",
+    "storage-scout": "^0.1.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.8.1",
+    "mocha": "^3.1.2",
+    "nodemon": "^1.11.0"
+  }
+}
