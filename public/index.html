@@ -1,0 +1,28 @@
+<!--HTML index page-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <link rel="stylesheet" href="main.css">
+    <meta charset="UTF-8">
+    <title>World Capital Database</title>
+</head>
+<body>
+    <h1>Mugsy's Express World Capital Database</h1>
+<!--now uses the post method.  Make that Work.-->
+        <form id="capital-form" action="/" method="post">
+  Country:<br>
+  <input type="text" name="country">
+  <br>
+  Capital:<br>
+  <input type="text" name="capital">
+  <br><br>
+  <input type="submit" id ="input-submit" value="Submit">
+</form>
+<br>
+<a href ="/capitals"><button id ="show-capitals">Show Capitals</button></a>
+<br>
+<a href ="/nuke"><button id ="Nuke">Nuke Capitals</button></a>
+<p>To update the capital data enter a Country and Capital, and then click the "Submit" button.</p>
+
+</body>
+</html>
