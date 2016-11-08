@@ -2,6 +2,7 @@ const chai      = require('chai');
 const chaiHttp  = require('chai-http');
 const assert    = chai.assert;
 const server    = require('../lib/appServer');
+const fs        = require('fs');
 chai.use(chaiHttp);
 
 describe('http single resource promise server', () => {
@@ -107,6 +108,17 @@ describe('http single resource promise server', () => {
             });
     });
 
+    it('wants to see if error will propagate if giving invalid data', done => {
+        request
+            .post('/cats')
+            .set('Content-Type', 'application/json')
+            .send('hi')
+            .end((err, res) => {
+                assert.equal(err.response.body.error, '<h1>Invalid JSON</h1>');
+                done();
+            });
+    });
+
     it('wants to see if PUT will act like POST if file is not present', done => {
         request
             .put('/cats/8')
@@ -149,11 +161,12 @@ describe('http single resource promise server', () => {
         request
             .del('/cats/non-existent-cat')
             .end((err, res) => {
-                if (err) return done(err);
-                else {
-                    assert.equal(res.text, '<h1>No such file exists</h1>');
-                    done();
-                }
+                assert.equal(err.response.body.error, '<h1>No such file exists</h1>');
+                done();
             });
     }); 
+
+    after(() => {
+        fs.writeFile('./lib/models/resources/0.json', JSON.stringify({id:'felix',age:10,color:'black and white'}));
+    });
 });

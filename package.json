@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "pretest": "eslint ./",
-    "test": "mocha ./test/appServer.test.js",
-    "test:watch": "mocha ./test/appServer.test.js -w",
+    "test": "mocha ./test/",
+    "test:watch": "mocha ./test/ -w",
+    "start": "eslint ./ && nodemon index.js",
     "lint": "eslint ./"
   },
   "repository": {
@@ -23,7 +24,8 @@
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "eslint": "^3.9.1",
-    "mocha": "^3.1.2"
+    "mocha": "^3.1.2",
+    "morgan": "^1.7.0"
   },
   "dependencies": {
     "express": "^4.14.0",
