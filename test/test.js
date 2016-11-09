@@ -1,5 +1,4 @@
 const server = require('../lib/server');
-const app = require('../lib/app');
 const chai = require('chai');
 const assert = require('chai').assert;
 const expect = require('chai').expect;
@@ -26,7 +25,7 @@ describe('HTML webapp that has a persistent data store', function(){
     it('does not take data that already exists in the store' , function(done){
         chai.request('http://localhost:3000')
         .post('/post')
-        .send({"country": "Spain", "capital": "Madrid"})
+        .send({'country': 'Spain', 'capital': 'Madrid'})
         .end(function (err, res) {
             expect(err).to.be.null;
             assert.equal(res.text,'The database already contains an entry for Spain');
@@ -37,7 +36,7 @@ describe('HTML webapp that has a persistent data store', function(){
     it('lets the user add data to the store', function(done){
         chai.request('http://localhost:3000')
         .post('/post')
-        .send({"country": "Finland", "capital": "Helsinki"})
+        .send({'country': 'Finland', 'capital': 'Helsinki'})
         .end(function (err, res) {
             expect(err).to.be.null;
             var patt = /Helsinki/g;
@@ -71,7 +70,7 @@ describe('HTML webapp that has a persistent data store', function(){
     it('lets you add more data after the nuke' , function(done){
         chai.request('http://localhost:3000')
         .post('/post')
-        .send({"country": "Spain", "capital": "Madrid"})
+        .send({'country': 'Spain', 'capital': 'Madrid'})
         .end(function (err, res) {
             var patt = /Madrid/g;
             assert(patt.test(res.text) === true);
