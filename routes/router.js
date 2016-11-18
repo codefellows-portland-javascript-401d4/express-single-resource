@@ -5,25 +5,20 @@ const handlers = require('../lib/requestHandlers');
 const bodyParser = require('../lib/bodyParser');
 
 router
-    .get('/', (request, response) => {
-      console.log('You requested GET - ', request.path);
-      handlers.getDir(request, response);
+    .get('/', (req, res) => {
+      handlers.getDir(req, res);
     })
-    .get('/:fileName', (request, response, next) => {
-      console.log('You requested GET - ', request.path);
-      handlers.getFile(request, response);
+    .get('/:fileName', (req, res, next) => {
+      handlers.getFile(req, res);
     })
-    .post('/', bodyParser, (request, response)=> {
-      console.log('Calling handlers.post... ');
-      handlers.post(request, response);
+    .post('/', bodyParser, (req, res)=> {
+      handlers.post(req, res);
     })
-    .put('/:fileName', bodyParser, (request, response) => {
-      console.log('Calling handlers.put...');
-      handlers.put(request, response);
+    .put('/:fileName', bodyParser, (req, res) => {
+      handlers.put(req, res);
     })
-    .delete('/:fileName', (request, response) => {
-      console.log('Calling handlers.del...');
-      handlers.del(request, response);
+    .delete('/:fileName', (req, res) => {
+      handlers.del(req, res);
     });
 
 module.exports = router;
