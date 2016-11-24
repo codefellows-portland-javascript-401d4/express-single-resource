@@ -2,13 +2,13 @@
   "name": "express-single-resource",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "lint": "eslint **/*.js",
     "pretest": "npm run lint",
     "test": "mocha",
     "watch": "npm run test -- -w",
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   "homepage": "https://github.com/codefellows-portland-javascript-401d4/express-single-resource#readme",
   "dependencies": {
     "express": "^4.14.0",
+    "mongoose": "^4.6.5",
     "sander": "^0.5.1"
   },
   "devDependencies": {

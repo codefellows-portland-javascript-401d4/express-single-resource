@@ -3,92 +3,77 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const assert = require('chai').assert;
 const expect = require('chai').expect;
-const index = require('../lib/index');
-const path = require('path');
-const rimraf = require('rimraf');
-const mkdirp = require('mkdirp');
 
-const citiesDir = path.resolve(__dirname, '../cities');
+const app = require('../lib/app');
+require('../lib/mongoose');
 
 describe('http server functionality', () => {
-    let req = chai.request(index);
+  let req = chai.request(app);
 
-    before(() => {
-        rimraf.sync(citiesDir);
-        mkdirp.sync(citiesDir);
-    });
+  const cupertino = {name: 'cupertino'};
+  const portland = {name: 'portland'};
+  let stringPortland = JSON.stringify(portland);
+  let stringCupertino = JSON.stringify(cupertino);
+  let portlandPostId = '';
 
-    const dushanbe = {name: 'dushanbe'};
-    let stringDush = JSON.stringify(dushanbe);
 
-    it('accesses empty file before initial POST', done => {
-        req
-            .get('/cities')
-            .then(res => {
-                assert.deepEqual(res.body, {});
-                done();
-            })
-            .catch(done);
-    });
-
-    it('POSTs successfully', done => {
-        let responseText = 'File dushanbe.txt successfully created in \'cities\' directory.';
-        req
+  it('POSTs successfully', done => {
+    req
             .post('/cities')
             .set('Content-Type', 'application/json')
-            .send(`${stringDush}`)
+            .send(stringPortland)
             .then(res => {
-                assert.equal(res.text, responseText);
-                done();
+              portlandPostId = JSON.parse(res.text)._id;
+              assert.equal(JSON.parse(res.text).name, 'portland');
+              done();
             })
             .catch(done);
-    });
+  });
 
-    it('GETs all files in directory after initial POST', done => {
-        req
+  it('GETs files in directory after initial POST', done => {
+    req
             .get('/cities')
             .then(res => {
-                expect(res).status(200);
-                assert.equal(res.text, 'dushanbe.txt\n');
-                done();
+              expect(res).status(200);
+              assert.notEqual(JSON.parse(res.text).length, 0);
+              assert.include(res.text, 'portland');
+              done();
             })
             .catch(done);
-    });
+  });
 
-    it('GETs a single file', done => {
-        req
-            .get('/cities/dushanbe')
+  it('GETs a single file', done => {
+    req
+            .get('/cities/' + portlandPostId)
             .then(res => {
-                expect(res).status(200);
-                assert.equal(res.text, 'dushanbe');
-                done();
+              expect(res).status(200);
+              assert.equal(JSON.parse(res.text).name, 'portland');
+              done();
             })
             .catch(done);
-    });
+  });
 
-    it('replaces a file using PUT', done => {
-        let responseText = 'File dushanbe.txt successfully replaced.';
-        req
-            .put('/cities')
+  it('replaces a file using PUT', done => {
+    req
+            .put('/cities/' + portlandPostId)
             .set('Content-Type', 'application/json')
-            .send(`${stringDush}`)
+            .send(stringCupertino)
             .then(res => {
-                expect(res).status(200);
-                assert.equal(res.text, responseText);
-                done();
+              expect(res).status(200);
+              assert.equal(JSON.parse(res.text).name, 'cupertino');
+              done();
             })
             .catch(done);
-    });
+  });
 
-    it('DELETEs a file', done => {
-        let responseText = 'File dushanbe.txt successfully deleted.';
-        req
-            .del('/cities/dushanbe')
+  it('DELETEs a file', done => {
+    req
+            .del('/cities/' + portlandPostId)
             .then(res => {
-                expect(res).status(200);
-                assert.equal(res.text, responseText);
-                done();
+              expect(res).status(200);
+              assert.equal(res.text, '{"ok":1,"n":1}');
+              done();
             })
             .catch(done);
-    });
+  });
 });
