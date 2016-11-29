@@ -110,7 +110,7 @@ describe('ABV', () => {
       .then(res => {
         console.log(res.text);
         const liquor = res.text;
-        assert.notInclude(liquor, `${gin.id}`);
+        assert.include(liquor, `${gin.id}`);
         done();
       })
       .catch(done);
