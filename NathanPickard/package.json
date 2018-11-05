@@ -1,0 +1,40 @@
+{
+  "name": "express-single-resource",
+  "version": "1.0.0",
+  "description": "Express single resource Lab, part2",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm run test:run",
+    "test:run": "mocha",
+    "test:watch": "npm run test:run -- -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NathanPickard/express-single-resource.git"
+  },
+  "author": "Nathan Pickard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NathanPickard/express-single-resource/issues"
+  },
+  "homepage": "https://github.com/NathanPickard/express-single-resource#readme",
+  "devDependencies": {
+      "mocha": "^3.1.2",
+      "nodemon": "^1.11.0",
+      "morgan": "^1.7.0",
+      "express": "4.14.0",    
+      "chai": "^3.5.0",
+      "chai-http": "^3.0.0",    
+      "rimraf": "^2.5.4",
+      "eslint": "3.9.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "debug": "^2.2.0",
+    "morgan": "^1.7.0",
+    "sander":"^0.5.1",
+    "rimraf": "^2.5.4",
+    "express": "4.14.0",
+    "pug": "2.0.0-beta6"
+  } 
+}
